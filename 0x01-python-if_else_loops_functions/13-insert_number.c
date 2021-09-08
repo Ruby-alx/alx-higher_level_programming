@@ -1,44 +1,24 @@
-#tdlib.h>
 #include "lists.h"
 
 /**
- * *insert_node - inserts a number into a sorted singly linked list
- * @head: pointer to address of head of list
- * @number: integer to be include in new node
- * Return: address of new node, or NULL if it failed
+ * insert_node - inserts a number into a sorted singly linked list
+ * @head: pointer to head node
+ * @number: value to be inserted
+ *
+ * Return: address of new node or NULL on failure
  */
 listint_t *insert_node(listint_t **head, int number)
 {
-  listint_t *newnode, *temp;
-
-  newnode = malloc(sizeof(listint_t));
-  if (newnode == NULL)
-    return (NULL);
-  if (*head == NULL)
+  listint_t *current = &head;
+  listint_t *next = current->next;
+  while (current->next != '\0')
     {
-      newnode->n = number;
-      newnode->next = *head;
-      *head = newnode;
-      return (newnode);
-    }
-  else if (number <= (*head)->n)
-    {
-      newnode->n = number;
-      newnode->next = *head;
-      *head = newnode;
-      return (newnode);
-    }
-  else
-    {
-      temp = *head;
-      while (temp->next != NULL && number > temp->next->n)
+      if (next->n > number)
 	{
-	  temp = temp->next;
+	  current->n = number;
+	  current->next = current->next;
+	  return (current);
 	}
-      newnode->n = number;
-      newnode->next = temp->next;
-      temp->next = newnode;
-      return (newnode);
+      current = current->next;
     }
   return (NULL);
-}
