@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-for letter in range(97, 123):
-    if chr(letter) == 'q' or chr(letter) == 'e':
-        continue
-    print("{:s}".format(chr(letter)), end='')
+for character in range(97, 123):
+    if (character != 101 and character != 113):
+        print("{:c}".format(character), end='')
