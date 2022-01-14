@@ -1,19 +1,15 @@
 #!/usr/bin/python3
-"""
-Handles errors duing message
-requests using urllib
-"""
+""" print error code """
 import urllib.request
-import urllib.parse
-import urllib.error
 import sys
 
 
 if __name__ == "__main__":
-    url = sys.argv[1]
+    req = urllib.request.Request(sys.argv[1])
     try:
-        with urllib.request.urlopen(url) as response:
-            print(response.read().decode('utf-8'))
-    except urllib.error.URLError as e:
+        urllib.request.urlopen(req)
+        with urllib.request.urlopen(req) as response:
+            bc = response.read().decode('utf-8')
+            print(bc)
+    except urllib.error.HTTPError as e:
         print("Error code: {}".format(e.code))
-        
